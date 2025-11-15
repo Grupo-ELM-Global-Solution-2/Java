@@ -1,0 +1,92 @@
+package br.com.fiap.to;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+/**
+ * Representa ummodulo cadastrado no sistema, associada a uma {@code TrilhaTO}.
+ *
+ * <p>Esta classe contém atributos como id, nome, duracao e id da trilha.</p>
+ *
+ * @author Lucas Barros Gouveia
+ * @author Enzo Okuizumi Miranda de Souza
+ * @author Milton Jakson de Souza Marcelino
+ * @version 1.0
+ * @since 21.0.7
+ */
+public class ModuloTO {
+
+    /** Identificador único do modulo. */
+    @NotNull
+    private Long idModulo;
+
+    /** Nome do modulo. */
+    @NotBlank
+    private String nome;
+
+    /** Duração do modulo. */
+    @NotBlank
+    private String duracao;
+
+    /** Data em que a modulo está agendada. */
+    @NotNull
+    private Long idTrilha;
+
+    /**
+     * Construtor padrão da classe {@code ModuloTO}.
+     */
+    public ModuloTO() {
+    }
+
+    /**
+     * Construtor completo para inicializar todos os atributos de uma modulo.
+     *
+     * @param idModulo   identificador único da modulo
+     * @param nome       nome do modulo
+     * @param duracao    duracao do modulo
+     * @param idTrilha   identificador da trilha a qual pertence
+     */
+    public ModuloTO(Long idModulo, String nome, String duracao, Long idTrilha) {
+        this.idModulo = idModulo;
+        this.nome = nome;
+        this.duracao = duracao;
+        this.idTrilha = idTrilha;
+    }
+
+    /** @return o identificador único da modulo */
+    public Long getIdModulo() {
+        return idModulo;
+    }
+
+    /**
+     * Define o identificador da modulo.
+     * @param idModulo o ID da modulo
+     */
+    public void setIdModulo(Long idModulo) {
+        this.idModulo = idModulo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(String duracao) {
+        this.duracao = duracao;
+    }
+
+    public Long getIdTrilha() {
+        return idTrilha;
+    }
+
+    public void setIdTrilha(Long idTrilha) {
+        this.idTrilha = idTrilha;
+    }
+}
