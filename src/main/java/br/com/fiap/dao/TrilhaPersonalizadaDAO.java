@@ -5,7 +5,7 @@ import br.com.fiap.to.TrilhaPersonalizadaTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date; // Importa java.sql.Date para conversão JDBC
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -93,7 +93,6 @@ public class TrilhaPersonalizadaDAO {
      */
     public ArrayList<TrilhaPersonalizadaTO> findByUserId(Long idUser) {
         ArrayList<TrilhaPersonalizadaTO> trilhas = new ArrayList<>();
-        // Ordena pela data de criação, da mais nova para a mais antiga
         String sql = "SELECT * FROM DDD_TRILHAS_PERSONALIZADAS WHERE id_user = ? ORDER BY data_criacao DESC";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
