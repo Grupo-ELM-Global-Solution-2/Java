@@ -25,7 +25,7 @@ public class TrilhaTO {
 
     /** dificuldade da trilha (fácil, médio e difícil). */
     @NotNull
-    @Pattern(regexp = "^(?i)(fácil|médio|difícil)$")
+    @Pattern(regexp = "^(?i)(facil|medio|dificil)$")
     private String dificuldade;
 
     /**
