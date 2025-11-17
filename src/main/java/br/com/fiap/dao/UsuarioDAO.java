@@ -138,7 +138,7 @@ public class UsuarioDAO {
      * @return o {@link UsuarioTO} atualizado, ou {@code null} se ocorrer algum erro.
      */
     public UsuarioTO update(UsuarioTO user) {
-        String sql = "UPDATE ddd_user SET status=?, id_user=?, id_modulo=? WHERE id_user=?";
+        String sql = "UPDATE ddd_user SET nome=?, email=?, senha=? WHERE id_user=?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setString(1, user.getNome());
             ps.setString(2, user.getEmail());

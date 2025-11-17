@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * Representa ummodulo cadastrado no sistema, associada a uma {@code TrilhaTO}.
+ * Representa um módulo cadastrado no sistema, associada a uma {@code TrilhaTO}.
  *
  * <p>Esta classe contém atributos como id, nome, duracao e id da trilha.</p>
  *
@@ -28,7 +28,7 @@ public class ModuloTO {
     @NotBlank
     private String duracao;
 
-    /** Data em que a modulo está agendada. */
+    /** Identificador da trilha a qual o módulo pertence. */
     @NotNull
     private Long idTrilha;
 
@@ -66,26 +66,41 @@ public class ModuloTO {
         this.idModulo = idModulo;
     }
 
+    /** @return o nome do módulo */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Define o nome do módulo.
+     * @param nome o nome a ser atribuído
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /** @return a duração do módulo */
     public String getDuracao() {
         return duracao;
     }
 
+    /**
+     * Define a duração do módulo.
+     * @param duracao a duração a ser atribuída
+     */
     public void setDuracao(String duracao) {
         this.duracao = duracao;
     }
 
+    /** @return o identificador da trilha */
     public Long getIdTrilha() {
         return idTrilha;
     }
 
+    /**
+     * Define o identificador da trilha.
+     * @param idTrilha o ID da trilha
+     */
     public void setIdTrilha(Long idTrilha) {
         this.idTrilha = idTrilha;
     }

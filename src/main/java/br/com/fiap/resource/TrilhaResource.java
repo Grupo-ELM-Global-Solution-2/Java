@@ -15,11 +15,11 @@ import java.util.ArrayList;
  *
  * Endpoints disponíveis:
  * <ul>
- *     <li>GET /trilha - Retorna todas as trilhas</li>
- *     <li>GET /trilha/{id_user} - Retorna trilha pelo ID</li>
- *     <li>POST /trilha - Cadastra um novo trilha</li>
- *     <li>PUT /trilha/{id_user} - Atualiza trilha existente</li>
- *     <li>DELETE /trilha/{id_user} - Remove trilha pelo ID</li>
+ * <li>GET /trilha - Retorna todas as trilhas</li>
+ * <li>GET /trilha/{id_trilha} - Retorna trilha pelo ID</li>
+ * <li>POST /trilha - Cadastra uma nova trilha</li>
+ * <li>PUT /trilha/{id_trilha} - Atualiza trilha existente</li>
+ * <li>DELETE /trilha/{id_trilha} - Remove trilha pelo ID</li>
  * </ul>
  *
  * @author Lucas Barros Gouveia
@@ -35,13 +35,13 @@ public class TrilhaResource {
     /**
      * Retorna todas as trilhas.
      *
-     * @return Response com status 200 (OK) e lista de {@link TrilhaTO}, ou 404 se não houver dadas.
+     * @return Response com status 200 (OK) e lista de {@link TrilhaTO}, ou 404 se não houver dados.
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         ArrayList<TrilhaTO> resultado = trilhaBO.findAll();
-        Response.ResponseBuilder response = (resultado != null) ? Response.ok() : Response.status(404);
+        Response.ResponseBuilder response = (resultado != null && !resultado.isEmpty()) ? Response.ok() : Response.status(404);
         response.entity(resultado);
         return response.build();
     }
@@ -53,9 +53,9 @@ public class TrilhaResource {
      * @return Response com status 200 (OK) e {@link TrilhaTO}, ou 404 se não encontrada.
      */
     @GET
-    @Path("/{id_user}")
+    @Path("/{id_trilha}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByCodigo(@PathParam("id_user") Long codigo) {
+    public Response findByCodigo(@PathParam("id_trilha") Long codigo) {
         TrilhaTO resultado = trilhaBO.findByCodigo(codigo);
         Response.ResponseBuilder response = (resultado != null) ? Response.ok() : Response.status(404);
         response.entity(resultado);
@@ -63,7 +63,7 @@ public class TrilhaResource {
     }
 
     /**
-     * Cadastra um novo trilha.
+     * Cadastra uma nova trilha.
      *
      * @param trilha {@link TrilhaTO} com os dados da trilha.
      * @return Response com status 201 (CREATED) e {@link TrilhaTO}, ou 400 se falhar.
@@ -78,14 +78,34 @@ public class TrilhaResource {
     }
 
     /**
+     * ATUALIZADO: Método PUT (update) adicionado para consistência.
+     * Atualiza uma trilha existente.
+     *
+     * @param trilha {@link TrilhaTO} com dados atualizados.
+     * @param idTrilha ID da trilha a ser atualizada.
+     * @return Response com status 201 (CREATED) e {@link TrilhaTO}, ou 400 se falhar.
+     */
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/{id_trilha}")
+    public Response update(@Valid TrilhaTO trilha, @PathParam("id_trilha") Long idTrilha) {
+        trilha.setIdTrilha(idTrilha);
+        TrilhaTO resultado = trilhaBO.update(trilha);
+        Response.ResponseBuilder response = (resultado != null) ? Response.created(null) : Response.status(400);
+        response.entity(resultado);
+        return response.build();
+    }
+
+
+    /**
      * Remove trilha pelo ID.
      *
      * @param codigo ID da trilha a ser removida.
      * @return Response com status 204 (NO CONTENT) se removida, ou 404 se não encontrada.
      */
     @DELETE
-    @Path("/{id_user}")
-    public Response delete(@PathParam("id_user") Long codigo) {
+    @Path("/{id_trilha}")
+    public Response delete(@PathParam("id_trilha") Long codigo) {
         Response.ResponseBuilder response = (trilhaBO.delete(codigo)) ? Response.status(204) : Response.status(404);
         return response.build();
     }
