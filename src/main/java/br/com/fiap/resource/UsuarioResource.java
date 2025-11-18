@@ -63,6 +63,25 @@ public class UsuarioResource {
     }
 
     /**
+     * Endpoint para buscar usuário pelo email.
+     *
+     * @param email Email do usuário, vindo da URL.
+     * @return Response com status 200 (OK) e o {@link UsuarioTO} completo,
+     * ou 404 (Not Found) se o email não estiver cadastrado.
+     */
+    @GET
+    @Path("/email/{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findByEmail(@PathParam("email") String email) {
+        if (email == null || email.isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("O email é obrigatório.").build();
+        }
+        UsuarioTO resultado = usuarioBO.findByEmail(email);
+        Response.ResponseBuilder response = (resultado != null) ? Response.ok(resultado) : Response.status(Response.Status.NOT_FOUND);
+        return response.build();
+    }
+
+    /**
      * Cadastra um novo usuário.
      *
      * @param usuario {@link UsuarioTO} com os dados do usuário.

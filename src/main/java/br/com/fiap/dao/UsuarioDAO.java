@@ -85,6 +85,34 @@ public class UsuarioDAO {
     }
 
     /**
+     * Busca um usuário pelo email.
+     *
+     * @param email O email do usuário.
+     * @return O objeto {@link UsuarioTO} encontrado, ou {@code null} se não existir.
+     */
+    public UsuarioTO findByEmail(String email) {
+        UsuarioTO user = null;
+        String sql = "SELECT * FROM ddd_user WHERE email = ?";
+        try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new UsuarioTO();
+                user.setIdUser(rs.getLong("id_user"));
+                user.setNome(rs.getString("nome"));
+                user.setEmail(rs.getString("email"));
+                user.setSenha(rs.getString("senha"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro na busca de usuário por email: " + e.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection();
+        }
+        return user;
+    }
+
+    /**
      * Insere um novo registro de usuario na tabela <b>ddd_user</b>.
      *
      * @param user o objeto {@link UsuarioTO} contendo os dados a serem inseridos.

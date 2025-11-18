@@ -40,6 +40,17 @@ public class ProgressoBO {
     }
 
     /**
+     * Busca todos os progressos de um usuário.
+     *
+     * @param idUser Código (ID) do usuário.
+     * @return ArrayList de {@link ProgressoTO}.
+     */
+    public ArrayList<ProgressoTO> findByUserId(Long idUser) {
+        progressoDAO = new ProgressoDAO();
+        return progressoDAO.findByUserId(idUser);
+    }
+
+    /**
      * Salva uma nova progresso no banco de dados.
      *
      * @param progresso Objeto {@link ProgressoTO} contendo os dados do progresso a ser cadastrado.

@@ -85,6 +85,42 @@ public class ProgressoDAO {
     }
 
     /**
+     * Busca todos os registros de progresso de um usuário específico.
+     *
+     * @param idUser O ID do usuário.
+     * @return uma lista de {@link ProgressoTO} do usuário, ou null em caso de erro.
+     */
+    public ArrayList<ProgressoTO> findByUserId(Long idUser) {
+        ArrayList<ProgressoTO> progressos = new ArrayList<>();
+        String sql = "SELECT * FROM ddd_progresso WHERE id_user = ?";
+
+        try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
+            ps.setLong(1, idUser);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs != null) {
+                while (rs.next()) {
+                    ProgressoTO progresso = new ProgressoTO();
+                    progresso.setIdProgresso(rs.getLong("id_progresso"));
+                    progresso.setStatus(rs.getInt("status"));
+                    progresso.setIdUser(rs.getLong("id_user"));
+                    progresso.setIdModulo(rs.getLong("id_modulo"));
+                    progressos.add(progresso);
+                }
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro na busca de progresso por ID de usuário: " + e.getMessage());
+            return null;
+        } finally {
+            ConnectionFactory.closeConnection();
+        }
+
+        return progressos;
+    }
+
+    /**
      * Insere um novo registro de progresso na tabela <b>ddd_progresso</b>.
      *
      * @param progresso o objeto {@link ProgressoTO} contendo os dados a serem inseridos.

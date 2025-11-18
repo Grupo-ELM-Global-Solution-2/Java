@@ -63,6 +63,24 @@ public class ProgressoResource {
     }
 
     /**
+     * Busca progressos pelo ID do usuário.
+     *
+     * @param idUser ID do usuário.
+     * @return Response 200 (OK) com a lista de progressos, ou 404 (Not Found)
+     * se o usuário não tiver progressos.
+     */
+    @GET
+    @Path("/usuario/{id_user}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findByUserId(@PathParam("id_user") Long idUser) {
+        ArrayList<ProgressoTO> resultado = progressoBO.findByUserId(idUser);
+
+        Response.ResponseBuilder response = (resultado != null && !resultado.isEmpty()) ? Response.ok() : Response.status(404);
+        response.entity(resultado);
+        return response.build();
+    }
+
+    /**
      * Cadastra uma nova progresso.
      *
      * @param progresso {@link ProgressoTO} com os dados do progresso.

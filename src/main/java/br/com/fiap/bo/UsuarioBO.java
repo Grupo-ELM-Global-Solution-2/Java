@@ -40,6 +40,17 @@ public class UsuarioBO {
     }
 
     /**
+     * Busca um usuário pelo email.
+     *
+     * @param email Email do usuário.
+     * @return {@link UsuarioTO} correspondente ao email ou null.
+     */
+    public UsuarioTO findByEmail(String email) {
+        usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.findByEmail(email);
+    }
+
+    /**
      * Salva um novo usuário no banco de dados.
      *
      * @param usuario Objeto {@link UsuarioTO} contendo os dados do usuário a ser cadastrado.
