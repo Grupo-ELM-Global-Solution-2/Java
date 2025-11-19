@@ -6,11 +6,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Classe responsável pelo acesso e manipulação dos dados da entidade <strong>ddd_progresso</strong>
+ * Classe responsável pelo acesso e manipulação dos dados da entidade <strong>ddd_prog</strong>
  * na base de dados SQL.
  * <p>
  * Esta classe implementa as operações CRUD (Create, Read, Update, Delete)
- * para a tabela <b>ddd_progresso</b>, permitindo o gerenciamento dos progressos
+ * para a tabela <b>ddd_prog</b>, permitindo o gerenciamento dos progressos
  * dos modulos do sistema.
  * </p>
  *
@@ -25,14 +25,14 @@ import java.util.ArrayList;
 public class ProgressoDAO {
 
     /**
-     * Recupera todos os progressos cadastrados na tabela <b>ddd_progresso</b>.
+     * Recupera todos os progressos cadastrados na tabela <b>ddd_prog</b>.
      *
      * @return uma lista de {@link ProgressoTO} com todos os progressos encontrados,
      * ou {@code null} caso ocorra um erro na progresso.
      */
     public ArrayList<ProgressoTO> findAll() {
         ArrayList<ProgressoTO> progressos = new ArrayList<ProgressoTO>();
-        String sql = "SELECT * FROM ddd_progresso ORDER BY id_prog";
+        String sql = "SELECT * FROM ddd_prog ORDER BY id_prog";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
@@ -64,7 +64,7 @@ public class ProgressoDAO {
      */
     public ProgressoTO findByCodigo(Long idProgresso) {
         ProgressoTO progresso = new ProgressoTO();
-        String sql = "SELECT * FROM ddd_progresso WHERE id_prog = ?";
+        String sql = "SELECT * FROM ddd_prog WHERE id_prog = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idProgresso);
             ResultSet rs = ps.executeQuery();
@@ -92,7 +92,7 @@ public class ProgressoDAO {
      */
     public ArrayList<ProgressoTO> findByUserId(Long idUser) {
         ArrayList<ProgressoTO> progressos = new ArrayList<>();
-        String sql = "SELECT * FROM ddd_progresso WHERE id_user = ?";
+        String sql = "SELECT * FROM ddd_prog WHERE id_user = ?";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idUser);
@@ -121,14 +121,14 @@ public class ProgressoDAO {
     }
 
     /**
-     * Insere um novo registro de progresso na tabela <b>ddd_progresso</b>.
+     * Insere um novo registro de progresso na tabela <b>ddd_prog</b>.
      *
      * @param progresso o objeto {@link ProgressoTO} contendo os dados a serem inseridos.
      * @return o próprio {@link ProgressoTO} se o registro for inserido com sucesso,
      * ou {@code null} em caso de erro.
      */
     public ProgressoTO save(ProgressoTO progresso) {
-        String sql = "INSERT INTO ddd_progresso(id_prog, status, id_user, id_modulo) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_prog(id_prog, status, id_user, id_modulo) VALUES(?,?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, progresso.getIdProgresso());
@@ -155,7 +155,7 @@ public class ProgressoDAO {
      * @return {@code true} se a exclusão for bem-sucedida, {@code false} caso contrário.
      */
     public boolean delete(Long idProgresso) {
-        String sql = "DELETE FROM ddd_progresso WHERE id_prog = ?";
+        String sql = "DELETE FROM ddd_prog WHERE id_prog = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idProgresso);
             return ps.executeUpdate() > 0;
@@ -168,13 +168,13 @@ public class ProgressoDAO {
     }
 
     /**
-     * Atualiza os dados de uma progresso existente na tabela <b>ddd_progresso</b>.
+     * Atualiza os dados de uma progresso existente na tabela <b>ddd_prog</b>.
      *
      * @param progresso o objeto {@link ProgressoTO} contendo os novos dados do progresso.
      * @return o {@link ProgressoTO} atualizado, ou {@code null} se ocorrer algum erro.
      */
     public ProgressoTO update(ProgressoTO progresso) {
-        String sql = "UPDATE ddd_progresso SET status=?, id_user=?, id_modulo=? WHERE id_prog=?";
+        String sql = "UPDATE ddd_prog SET status=?, id_user=?, id_modulo=? WHERE id_prog=?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setInt(1, progresso.getStatus());
             ps.setLong(2, progresso.getIdUser());
