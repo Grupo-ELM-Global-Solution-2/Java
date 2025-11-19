@@ -15,7 +15,6 @@ import jakarta.validation.constraints.*;
  */
 public class UsuarioTO {
     /** Identificador único do usuário */
-    @NotNull
     private Long idUser;
 
     /** Nome do usuário */

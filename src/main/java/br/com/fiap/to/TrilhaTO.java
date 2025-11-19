@@ -16,7 +16,6 @@ import jakarta.validation.constraints.*;
  */
 public class TrilhaTO {
     /** Identificador único da trilha. */
-    @NotNull
     private Long idTrilha;
 
     /** Nome da trilha. */

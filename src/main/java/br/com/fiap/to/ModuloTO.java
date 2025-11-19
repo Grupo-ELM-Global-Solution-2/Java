@@ -17,7 +17,6 @@ import jakarta.validation.constraints.NotNull;
 public class ModuloTO {
 
     /** Identificador único do modulo. */
-    @NotNull
     private Long idModulo;
 
     /** Nome do modulo. */

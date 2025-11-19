@@ -19,7 +19,6 @@ import java.time.LocalDate;
 public class TrilhaPersonalizadaTO {
 
     /** Identificador único da trilha personalizada. */
-    @NotNull
     private Long idTrilhaPers;
 
     /** Identificador do usuário que criou a trilha. */

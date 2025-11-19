@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Pattern;
 
 public class SugestoesTO {
     /** Identificador único de sugestoes. */
-    @NotNull
     private Long idSugestoes;
 
     /** Titulo das Sugestões. */

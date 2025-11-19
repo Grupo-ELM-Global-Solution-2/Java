@@ -16,7 +16,6 @@ import jakarta.validation.constraints.*;
  */
 public class ProgressoTO {
     /** Identificador único do progresso. */
-    @NotNull
     private Long idProgresso;
 
     /** Status do progresso (Ex: 78%). */
