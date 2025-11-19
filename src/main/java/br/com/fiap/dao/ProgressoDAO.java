@@ -128,13 +128,12 @@ public class ProgressoDAO {
      * ou {@code null} em caso de erro.
      */
     public ProgressoTO save(ProgressoTO progresso) {
-        String sql = "INSERT INTO ddd_prog(id_prog, status, id_user, id_modulo) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_prog(status, id_user, id_modulo) VALUES(?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
-            ps.setLong(1, progresso.getIdProgresso());
-            ps.setInt(2, progresso.getStatus());
-            ps.setLong(3, progresso.getIdUser());
-            ps.setLong(4, progresso.getIdModulo());
+            ps.setInt(1, progresso.getStatus());
+            ps.setLong(2, progresso.getIdUser());
+            ps.setLong(3, progresso.getIdModulo());
             if (ps.executeUpdate() > 0) {
                 return progresso;
             } else {

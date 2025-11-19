@@ -130,13 +130,12 @@ public class TrilhaPersonalizadaDAO {
      * ou {@code null} em caso de erro.
      */
     public TrilhaPersonalizadaTO save(TrilhaPersonalizadaTO trilhaP) {
-        String sql = "INSERT INTO ddd_trilha_pers(id_pers, id_user, data_criacao, json_conteudo) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_trilha_pers(id_user, data_criacao, json_conteudo) VALUES(?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
-            ps.setLong(1, trilhaP.getIdTrilhaPers());
-            ps.setLong(2, trilhaP.getIdUser());
-            ps.setDate(3, Date.valueOf(trilhaP.getDataCriacao()));
-            ps.setString(4, trilhaP.getJsonConteudo());
+            ps.setLong(1, trilhaP.getIdUser());
+            ps.setDate(2, Date.valueOf(trilhaP.getDataCriacao()));
+            ps.setString(3, trilhaP.getJsonConteudo());
 
             if (ps.executeUpdate() > 0) {
                 return trilhaP;

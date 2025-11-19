@@ -99,16 +99,15 @@ public class SugestoesDAO {
      * ou {@code null} em caso de erro.
      */
     public SugestoesTO save(SugestoesTO sugestao) {
-        String sql = "INSERT INTO ddd_sugestoes(id_sugs, titulo, tipo, descricao, duracao, dificuldade, link) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO ddd_sugestoes(titulo, tipo, descricao, duracao, dificuldade, link) VALUES(?,?,?,?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
-            ps.setLong(1, sugestao.getIdSugestoes());
-            ps.setString(2, sugestao.getTitulo());
-            ps.setString(3, sugestao.getTipo());
-            ps.setString(4, sugestao.getDescricao());
-            ps.setString(5, sugestao.getDuracao());
-            ps.setString(6, sugestao.getDificuldade());
-            ps.setString(7, sugestao.getLink());
+            ps.setString(1, sugestao.getTitulo());
+            ps.setString(2, sugestao.getTipo());
+            ps.setString(3, sugestao.getDescricao());
+            ps.setString(4, sugestao.getDuracao());
+            ps.setString(5, sugestao.getDificuldade());
+            ps.setString(6, sugestao.getLink());
 
             if (ps.executeUpdate() > 0) {
                 return sugestao;

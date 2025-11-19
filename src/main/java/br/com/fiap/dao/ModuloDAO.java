@@ -94,14 +94,13 @@ public class ModuloDAO {
      * ou {@code null} em caso de erro.
      */
     public ModuloTO save(ModuloTO modulo) {
-        String sql = "INSERT INTO ddd_modulo(id_mod, nome, duracao, link, id_tri) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO ddd_modulo(nome, duracao, link, id_tri) VALUES(?,?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
-            ps.setLong(1, modulo.getIdModulo());
-            ps.setString(2, modulo.getNome());
-            ps.setString(3, modulo.getDuracao());
-            ps.setString(4, modulo.getLink());
-            ps.setLong(5, modulo.getIdTrilha());
+            ps.setString(1, modulo.getNome());
+            ps.setString(2, modulo.getDuracao());
+            ps.setString(3, modulo.getLink());
+            ps.setLong(4, modulo.getIdTrilha());
             if (ps.executeUpdate() > 0) {
                 return modulo;
             } else {

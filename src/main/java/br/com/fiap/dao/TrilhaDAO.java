@@ -94,13 +94,12 @@ public class TrilhaDAO {
      * ou {@code null} em caso de erro.
      */
     public TrilhaTO save(TrilhaTO trilha) {
-        String sql = "INSERT INTO ddd_trilha(id_tri, nome, dificuldade, descricao) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_trilha(nome, dificuldade, descricao) VALUES(?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
-            ps.setLong(1, trilha.getIdTrilha());
-            ps.setString(2, trilha.getNome());
-            ps.setString(3, trilha.getDificuldade());
-            ps.setString(4, trilha.getDescricao());
+            ps.setString(1, trilha.getNome());
+            ps.setString(2, trilha.getDificuldade());
+            ps.setString(3, trilha.getDescricao());
             if (ps.executeUpdate() > 0) {
                 return trilha;
             } else {
