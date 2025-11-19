@@ -120,13 +120,12 @@ public class UsuarioDAO {
      * ou {@code null} em caso de erro.
      */
     public UsuarioTO save(UsuarioTO user) {
-        String sql = "INSERT INTO ddd_user(id_user, nome, email, senha) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_user(nome, email, senha) VALUES(?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
-            ps.setLong(1, user.getIdUser());
-            ps.setString(2, user.getNome());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getSenha());
+            ps.setString(1, user.getNome());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getSenha());
             if (ps.executeUpdate() > 0) {
                 return user;
             } else {
