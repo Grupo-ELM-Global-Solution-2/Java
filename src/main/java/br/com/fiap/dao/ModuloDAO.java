@@ -41,6 +41,7 @@ public class ModuloDAO {
                     modulo.setIdModulo(rs.getLong("id_mod"));
                     modulo.setNome(rs.getString("nome"));
                     modulo.setDuracao(rs.getString("duracao"));
+                    modulo.setLink(rs.getString("link"));
                     modulo.setIdTrilha(rs.getLong("id_tri"));
                     modulos.add(modulo);
                 }
@@ -72,6 +73,7 @@ public class ModuloDAO {
                 modulo.setIdModulo(rs.getLong("id_mod"));
                 modulo.setNome(rs.getString("nome"));
                 modulo.setDuracao(rs.getString("duracao"));
+                modulo.setLink(rs.getString("link"));
                 modulo.setIdTrilha(rs.getLong("id_tri"));
             } else {
                 return null;
@@ -92,13 +94,14 @@ public class ModuloDAO {
      * ou {@code null} em caso de erro.
      */
     public ModuloTO save(ModuloTO modulo) {
-        String sql = "INSERT INTO ddd_modulo(id_mod, nome, duracao, id_tri) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_modulo(id_mod, nome, duracao, link, id_tri) VALUES(?,?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, modulo.getIdModulo());
             ps.setString(2, modulo.getNome());
             ps.setString(3, modulo.getDuracao());
-            ps.setLong(4, modulo.getIdTrilha());
+            ps.setString(4, modulo.getLink());
+            ps.setLong(5, modulo.getIdTrilha());
             if (ps.executeUpdate() > 0) {
                 return modulo;
             } else {
@@ -138,12 +141,13 @@ public class ModuloDAO {
      * @return o {@link ModuloTO} atualizado, ou {@code null} se ocorrer algum erro.
      */
     public ModuloTO update(ModuloTO modulo) {
-        String sql = "UPDATE ddd_modulo SET nome=?, duracao=?, id_tri=? WHERE id_mod=?";
+        String sql = "UPDATE ddd_modulo SET nome=?, duracao=?, link=?, id_tri=? WHERE id_mod=?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setString(1, modulo.getNome());
             ps.setString(2, modulo.getDuracao());
             ps.setLong(3, modulo.getIdTrilha());
-            ps.setLong(4, modulo.getIdModulo());
+            ps.setString(4, modulo.getLink());
+            ps.setLong(5, modulo.getIdModulo());
 
             if (ps.executeUpdate() > 0) {
                 return modulo;

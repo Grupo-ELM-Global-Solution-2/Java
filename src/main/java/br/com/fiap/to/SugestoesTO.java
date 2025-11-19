@@ -16,19 +16,19 @@ public class SugestoesTO {
     @NotBlank
     private String tipo;
 
-    /** Descrição da trilha */
+    /** Descrição de sugestões */
     @NotBlank
     private String descricao;
 
-    /** Duração da trilha */
+    /** Duração de sugestões */
     @NotBlank
     private String duracao;
 
-    /** Dificuldade da trilha */
+    /** Dificuldade de sugestões */
     @NotBlank
     private String dificuldade;
 
-    /** link da trilha */
+    /** link de sugestões */
     @NotBlank
     private String link;
 

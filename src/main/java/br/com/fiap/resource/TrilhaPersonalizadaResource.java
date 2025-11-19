@@ -45,7 +45,6 @@ public class TrilhaPersonalizadaResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         ArrayList<TrilhaPersonalizadaTO> resultado = trilhaPersonalizadaBO.findAll();
-        // Corrigido: 4404 para 404
         Response.ResponseBuilder response = (resultado != null && !resultado.isEmpty()) ? Response.ok() : Response.status(404);
         response.entity(resultado);
         return response.build();
@@ -76,7 +75,7 @@ public class TrilhaPersonalizadaResource {
      * ou 404 (Not Found) se o usuário não tiver trilhas ou não existir.
      */
     @GET
-    @Path("/usuario/{id_user}") // Endpoint para buscar por usuário
+    @Path("/usuario/{id_user}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findByUserId(@PathParam("id_user") Long idUser) {
         ArrayList<TrilhaPersonalizadaTO> resultado = trilhaPersonalizadaBO.findByUserId(idUser);

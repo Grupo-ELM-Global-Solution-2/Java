@@ -27,6 +27,10 @@ public class ModuloTO {
     @NotBlank
     private String duracao;
 
+    /** Link Vídeo do modulo. */
+    @NotBlank
+    private String link;
+
     /** Identificador da trilha a qual o módulo pertence. */
     @NotNull
     private Long idTrilha;
@@ -43,12 +47,14 @@ public class ModuloTO {
      * @param idModulo   identificador único da modulo
      * @param nome       nome do modulo
      * @param duracao    duracao do modulo
+     * @param link      link vídeo do modulo
      * @param idTrilha   identificador da trilha a qual pertence
      */
-    public ModuloTO(Long idModulo, String nome, String duracao, Long idTrilha) {
+    public ModuloTO(Long idModulo, String nome, String duracao, String link, Long idTrilha) {
         this.idModulo = idModulo;
         this.nome = nome;
         this.duracao = duracao;
+        this.link = link;
         this.idTrilha = idTrilha;
     }
 
@@ -89,6 +95,19 @@ public class ModuloTO {
      */
     public void setDuracao(String duracao) {
         this.duracao = duracao;
+    }
+
+    /** @return a link vídeo do módulo */
+    public String getLink() {
+        return link;
+    }
+
+    /**
+     * Define a link vídeo do módulo.
+     * @param link link vídeo a ser atribuído
+     */
+    public void setLink(String link) {
+        this.link = link;
     }
 
     /** @return o identificador da trilha */

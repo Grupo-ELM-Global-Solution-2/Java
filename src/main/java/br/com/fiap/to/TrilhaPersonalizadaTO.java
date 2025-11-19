@@ -26,7 +26,7 @@ public class TrilhaPersonalizadaTO {
     private Long idUser;
 
     /** Data de criação da trilha. */
-    private LocalDate dataCriacao; // Usamos LocalDate para datas sem hora
+    private LocalDate dataCriacao;
 
     /** Conteúdo da trilha, armazenado como um texto JSON (CLOB). */
     @NotBlank
