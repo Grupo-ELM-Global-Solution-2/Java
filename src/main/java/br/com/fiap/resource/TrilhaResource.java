@@ -78,7 +78,7 @@ public class TrilhaResource {
     }
 
     /**
-     * ATUALIZADO: Método PUT (update) adicionado para consistência.
+     * Metodo PUT (update) adicionado para consistência.
      * Atualiza uma trilha existente.
      *
      * @param trilha {@link TrilhaTO} com dados atualizados.

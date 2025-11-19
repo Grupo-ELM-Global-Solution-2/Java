@@ -34,13 +34,13 @@ public class TrilhaDAO {
      */
     public ArrayList<TrilhaTO> findAll() {
         ArrayList<TrilhaTO> trilhas = new ArrayList<TrilhaTO>();
-        String sql = "SELECT * FROM ddd_trilha ORDER BY id_trilha";
+        String sql = "SELECT * FROM ddd_trilha ORDER BY id_tri";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
                     TrilhaTO trilha = new TrilhaTO();
-                    trilha.setIdTrilha(rs.getLong("id_trilha"));
+                    trilha.setIdTrilha(rs.getLong("id_tri"));
                     trilha.setNome(rs.getString("nome"));
                     trilha.setDificuldade(rs.getString("dificuldade"));
                     trilha.setDescricao(rs.getString("descricao"));
@@ -66,12 +66,12 @@ public class TrilhaDAO {
      */
     public TrilhaTO findByCodigo(Long idTrilha) {
         TrilhaTO trilha = new TrilhaTO();
-        String sql = "SELECT * FROM ddd_trilha WHERE id_trilha = ?";
+        String sql = "SELECT * FROM ddd_trilha WHERE id_tri = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idTrilha);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                trilha.setIdTrilha(rs.getLong("id_trilha"));
+                trilha.setIdTrilha(rs.getLong("id_tri"));
                 trilha.setNome(rs.getString("nome"));
                 trilha.setDificuldade(rs.getString("dificuldade"));
                 trilha.setDescricao(rs.getString("descricao"));
@@ -94,7 +94,7 @@ public class TrilhaDAO {
      * ou {@code null} em caso de erro.
      */
     public TrilhaTO save(TrilhaTO trilha) {
-        String sql = "INSERT INTO ddd_trilha(id_trilha, nome, dificuldade, descricao) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_trilha(id_tri, nome, dificuldade, descricao) VALUES(?,?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, trilha.getIdTrilha());
@@ -121,7 +121,7 @@ public class TrilhaDAO {
      * @return {@code true} se a exclusão for bem-sucedida, {@code false} caso contrário.
      */
     public boolean delete(Long idTrilha) {
-        String sql = "DELETE FROM ddd_trilha WHERE id_trilha = ?";
+        String sql = "DELETE FROM ddd_trilha WHERE id_tri = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idTrilha);
             return ps.executeUpdate() > 0;
@@ -140,7 +140,7 @@ public class TrilhaDAO {
      * @return o {@link TrilhaTO} atualizado, ou {@code null} se ocorrer algum erro.
      */
     public TrilhaTO update(TrilhaTO trilha) {
-        String sql = "UPDATE ddd_trilha SET nome=?, dificuldade=?, descricao=? WHERE id_trilha=?";
+        String sql = "UPDATE ddd_trilha SET nome=?, dificuldade=?, descricao=? WHERE id_tri=?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setString(1, trilha.getNome());
             ps.setString(2, trilha.getDificuldade());

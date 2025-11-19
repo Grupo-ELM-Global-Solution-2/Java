@@ -32,13 +32,13 @@ public class ProgressoDAO {
      */
     public ArrayList<ProgressoTO> findAll() {
         ArrayList<ProgressoTO> progressos = new ArrayList<ProgressoTO>();
-        String sql = "SELECT * FROM ddd_progresso ORDER BY id_progresso";
+        String sql = "SELECT * FROM ddd_progresso ORDER BY id_prog";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
                     ProgressoTO progresso = new ProgressoTO();
-                    progresso.setIdProgresso(rs.getLong("id_progresso"));
+                    progresso.setIdProgresso(rs.getLong("id_prog"));
                     progresso.setStatus(rs.getInt("status"));
                     progresso.setIdUser(rs.getLong("id_user"));
                     progresso.setIdModulo(rs.getLong("id_modulo"));
@@ -64,12 +64,12 @@ public class ProgressoDAO {
      */
     public ProgressoTO findByCodigo(Long idProgresso) {
         ProgressoTO progresso = new ProgressoTO();
-        String sql = "SELECT * FROM ddd_progresso WHERE id_progresso = ?";
+        String sql = "SELECT * FROM ddd_progresso WHERE id_prog = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idProgresso);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                progresso.setIdProgresso(rs.getLong("id_progresso"));
+                progresso.setIdProgresso(rs.getLong("id_prog"));
                 progresso.setStatus(rs.getInt("status"));
                 progresso.setIdUser(rs.getLong("id_user"));
                 progresso.setIdModulo(rs.getLong("id_modulo"));
@@ -101,7 +101,7 @@ public class ProgressoDAO {
             if (rs != null) {
                 while (rs.next()) {
                     ProgressoTO progresso = new ProgressoTO();
-                    progresso.setIdProgresso(rs.getLong("id_progresso"));
+                    progresso.setIdProgresso(rs.getLong("id_prog"));
                     progresso.setStatus(rs.getInt("status"));
                     progresso.setIdUser(rs.getLong("id_user"));
                     progresso.setIdModulo(rs.getLong("id_modulo"));
@@ -128,7 +128,7 @@ public class ProgressoDAO {
      * ou {@code null} em caso de erro.
      */
     public ProgressoTO save(ProgressoTO progresso) {
-        String sql = "INSERT INTO ddd_progresso(id_progresso, status, id_user, id_modulo) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_progresso(id_prog, status, id_user, id_modulo) VALUES(?,?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, progresso.getIdProgresso());
@@ -155,7 +155,7 @@ public class ProgressoDAO {
      * @return {@code true} se a exclusão for bem-sucedida, {@code false} caso contrário.
      */
     public boolean delete(Long idProgresso) {
-        String sql = "DELETE FROM ddd_progresso WHERE id_progresso = ?";
+        String sql = "DELETE FROM ddd_progresso WHERE id_prog = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idProgresso);
             return ps.executeUpdate() > 0;
@@ -174,7 +174,7 @@ public class ProgressoDAO {
      * @return o {@link ProgressoTO} atualizado, ou {@code null} se ocorrer algum erro.
      */
     public ProgressoTO update(ProgressoTO progresso) {
-        String sql = "UPDATE ddd_progresso SET status=?, id_user=?, id_modulo=? WHERE id_progresso=?";
+        String sql = "UPDATE ddd_progresso SET status=?, id_user=?, id_modulo=? WHERE id_prog=?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setInt(1, progresso.getStatus());
             ps.setLong(2, progresso.getIdUser());

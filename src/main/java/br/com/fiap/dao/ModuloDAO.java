@@ -32,16 +32,16 @@ public class ModuloDAO {
      */
     public ArrayList<ModuloTO> findAll() {
         ArrayList<ModuloTO> modulos = new ArrayList<ModuloTO>();
-        String sql = "SELECT * FROM ddd_modulo ORDER BY id_modulo";
+        String sql = "SELECT * FROM ddd_modulo ORDER BY id_mod";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
                     ModuloTO modulo = new ModuloTO();
-                    modulo.setIdModulo(rs.getLong("id_modulo"));
+                    modulo.setIdModulo(rs.getLong("id_mod"));
                     modulo.setNome(rs.getString("nome"));
                     modulo.setDuracao(rs.getString("duracao"));
-                    modulo.setIdTrilha(rs.getLong("id_trilha"));
+                    modulo.setIdTrilha(rs.getLong("id_tri"));
                     modulos.add(modulo);
                 }
             } else {
@@ -64,15 +64,15 @@ public class ModuloDAO {
      */
     public ModuloTO findByCodigo(Long idModulo) {
         ModuloTO modulo = new ModuloTO();
-        String sql = "SELECT * FROM ddd_modulo WHERE id_modulo = ?";
+        String sql = "SELECT * FROM ddd_modulo WHERE id_mod = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idModulo);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                modulo.setIdModulo(rs.getLong("id_modulo"));
+                modulo.setIdModulo(rs.getLong("id_mod"));
                 modulo.setNome(rs.getString("nome"));
                 modulo.setDuracao(rs.getString("duracao"));
-                modulo.setIdTrilha(rs.getLong("id_trilha"));
+                modulo.setIdTrilha(rs.getLong("id_tri"));
             } else {
                 return null;
             }
@@ -92,7 +92,7 @@ public class ModuloDAO {
      * ou {@code null} em caso de erro.
      */
     public ModuloTO save(ModuloTO modulo) {
-        String sql = "INSERT INTO ddd_modulo(id_modulo, nome, duracao, id_trilha) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ddd_modulo(id_mod, nome, duracao, id_tri) VALUES(?,?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, modulo.getIdModulo());
@@ -119,7 +119,7 @@ public class ModuloDAO {
      * @return {@code true} se a exclusão for bem-sucedida, {@code false} caso contrário.
      */
     public boolean delete(Long idModulo) {
-        String sql = "DELETE FROM ddd_modulo WHERE id_modulo = ?";
+        String sql = "DELETE FROM ddd_modulo WHERE id_mod = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idModulo);
             return ps.executeUpdate() > 0;
@@ -138,7 +138,7 @@ public class ModuloDAO {
      * @return o {@link ModuloTO} atualizado, ou {@code null} se ocorrer algum erro.
      */
     public ModuloTO update(ModuloTO modulo) {
-        String sql = "UPDATE ddd_modulo SET nome=?, duracao=?, id_trilha=? WHERE id_modulo=?";
+        String sql = "UPDATE ddd_modulo SET nome=?, duracao=?, id_tri=? WHERE id_mod=?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setString(1, modulo.getNome());
             ps.setString(2, modulo.getDuracao());

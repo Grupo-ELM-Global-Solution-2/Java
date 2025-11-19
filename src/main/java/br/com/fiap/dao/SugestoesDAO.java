@@ -33,13 +33,13 @@ public class SugestoesDAO {
      */
     public ArrayList<SugestoesTO> findAll() {
         ArrayList<SugestoesTO> sugestoes = new ArrayList<SugestoesTO>();
-        String sql = "SELECT * FROM ddd_sugestoes ORDER BY id_sugestoes";
+        String sql = "SELECT * FROM ddd_sugestoes ORDER BY id_sugs";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
                     SugestoesTO sugestao = new SugestoesTO();
-                    sugestao.setIdSugestoes(rs.getLong("id_sugestoes"));
+                    sugestao.setIdSugestoes(rs.getLong("id_sugs"));
                     sugestao.setTitulo(rs.getString("titulo"));
                     sugestao.setTipo(rs.getString("tipo"));
                     sugestao.setDescricao(rs.getString("descricao"));
@@ -68,12 +68,12 @@ public class SugestoesDAO {
      */
     public SugestoesTO findByCodigo(Long idSugestoes) {
         SugestoesTO sugestao = new SugestoesTO();
-        String sql = "SELECT * FROM ddd_sugestoes WHERE id_sugestoes = ?";
+        String sql = "SELECT * FROM ddd_sugestoes WHERE id_sugs = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idSugestoes);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                sugestao.setIdSugestoes(rs.getLong("id_sugestoes"));
+                sugestao.setIdSugestoes(rs.getLong("id_sugs"));
                 sugestao.setTitulo(rs.getString("titulo"));
                 sugestao.setTipo(rs.getString("tipo"));
                 sugestao.setDescricao(rs.getString("descricao"));
@@ -99,7 +99,7 @@ public class SugestoesDAO {
      * ou {@code null} em caso de erro.
      */
     public SugestoesTO save(SugestoesTO sugestao) {
-        String sql = "INSERT INTO ddd_sugestoes(id_sugestoes, titulo, tipo, descricao, duracao, dificuldade, link) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO ddd_sugestoes(id_sugs, titulo, tipo, descricao, duracao, dificuldade, link) VALUES(?,?,?,?,?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, sugestao.getIdSugestoes());
@@ -130,7 +130,7 @@ public class SugestoesDAO {
      * @return {@code true} se a exclusão for bem-sucedida, {@code false} caso contrário.
      */
     public boolean delete(Long idSugestoes) {
-        String sql = "DELETE FROM ddd_sugestoes WHERE id_sugestoes = ?";
+        String sql = "DELETE FROM ddd_sugestoes WHERE id_sugs = ?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idSugestoes);
             return ps.executeUpdate() > 0;
@@ -149,7 +149,7 @@ public class SugestoesDAO {
      * @return o {@link SugestoesTO} atualizado, ou {@code null} se ocorrer algum erro.
      */
     public SugestoesTO update(SugestoesTO sugestao) {
-        String sql = "UPDATE ddd_sugestoes SET titulo=?, tipo=?, descricao=?, duracao=?, dificuldade=?, link=? WHERE id_sugestoes=?";
+        String sql = "UPDATE ddd_sugestoes SET titulo=?, tipo=?, descricao=?, duracao=?, dificuldade=?, link=? WHERE id_sugs=?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setString(1, sugestao.getTitulo());
             ps.setString(2, sugestao.getTipo());
