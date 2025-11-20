@@ -4,6 +4,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+/**
+ * Representa uma sugestão criada pelo sistema.
+ *
+ * <p>Esta classe contém o ID da sugestão, o titulo, o tipo, a descrição, duração, dificuldade e link da sugestão.</p>
+ *
+ * @author Lucas Barros Gouveia
+ * @author Enzo Okuizumi Miranda de Souza
+ * @author Milton Jakson de Souza Marcelino
+ * @version 1.0
+ * @since 21.0.7
+ */
 public class SugestoesTO {
     /** Identificador único de sugestoes. */
     private Long idSugestoes;
