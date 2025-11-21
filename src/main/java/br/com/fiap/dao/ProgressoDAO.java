@@ -41,7 +41,7 @@ public class ProgressoDAO {
                     progresso.setIdProgresso(rs.getLong("id_prog"));
                     progresso.setStatus(rs.getInt("status"));
                     progresso.setIdUser(rs.getLong("id_user"));
-                    progresso.setIdModulo(rs.getLong("id_modulo"));
+                    progresso.setIdModulo(rs.getLong("id_mod"));
                     progressos.add(progresso);
                 }
             } else {
@@ -72,7 +72,7 @@ public class ProgressoDAO {
                 progresso.setIdProgresso(rs.getLong("id_prog"));
                 progresso.setStatus(rs.getInt("status"));
                 progresso.setIdUser(rs.getLong("id_user"));
-                progresso.setIdModulo(rs.getLong("id_modulo"));
+                progresso.setIdModulo(rs.getLong("id_mod"));
             } else {
                 return null;
             }
@@ -104,7 +104,7 @@ public class ProgressoDAO {
                     progresso.setIdProgresso(rs.getLong("id_prog"));
                     progresso.setStatus(rs.getInt("status"));
                     progresso.setIdUser(rs.getLong("id_user"));
-                    progresso.setIdModulo(rs.getLong("id_modulo"));
+                    progresso.setIdModulo(rs.getLong("id_mod"));
                     progressos.add(progresso);
                 }
             } else {
@@ -128,7 +128,7 @@ public class ProgressoDAO {
      * ou {@code null} em caso de erro.
      */
     public ProgressoTO save(ProgressoTO progresso) {
-        String sql = "INSERT INTO ddd_prog(status, id_user, id_modulo) VALUES(?,?,?)";
+        String sql = "INSERT INTO ddd_prog(status, id_user, id_mod) VALUES(?,?,?)";
 
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setInt(1, progresso.getStatus());
@@ -173,7 +173,7 @@ public class ProgressoDAO {
      * @return o {@link ProgressoTO} atualizado, ou {@code null} se ocorrer algum erro.
      */
     public ProgressoTO update(ProgressoTO progresso) {
-        String sql = "UPDATE ddd_prog SET status=?, id_user=?, id_modulo=? WHERE id_prog=?";
+        String sql = "UPDATE ddd_prog SET status=?, id_user=?, id_mod=? WHERE id_prog=?";
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setInt(1, progresso.getStatus());
             ps.setLong(2, progresso.getIdUser());
