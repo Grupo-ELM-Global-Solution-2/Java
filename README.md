@@ -1,9 +1,21 @@
-**Documentação de Java PDF**: 
+- **Documentação de Java PDF**: 
 
-**Documentação de Java DOCX**: [https://docs.google.com/document/d/1JSUMpyl1nEO1g5-XnXla8qzYbwpL32h1wOO9DD6-hIM/edit?usp=sharing](https://docs.google.com/document/d/1JSUMpyl1nEO1g5-XnXla8qzYbwpL32h1wOO9DD6-hIM/edit?usp=sharing)
+- **Documentação de Java DOCX**: [https://docs.google.com/document/d/1JSUMpyl1nEO1g5-XnXla8qzYbwpL32h1wOO9DD6-hIM/edit?usp=sharing](https://docs.google.com/document/d/1JSUMpyl1nEO1g5-XnXla8qzYbwpL32h1wOO9DD6-hIM/edit?usp=sharing)
 
-**Link Render**: [https://reintegrai-api.onrender.com](https://reintegrai-api.onrender.com)
+- **Repositório Java**: [https://github.com/Grupo-ELM-Global-Solution-2/Java](https://github.com/Grupo-ELM-Global-Solution-2/Java)
 
+- **Link Render**: [https://reintegrai-api.onrender.com](https://reintegrai-api.onrender.com)
+
+### Link Repositórios
+
+- **Repositório Banco de dados**: [https://github.com/Grupo-ELM-Global-Solution-2/Building-Relational-Database](https://github.com/Grupo-ELM-Global-Solution-2/Building-Relational-Database)
+
+- **Repositório Python**: [https://github.com/Grupo-ELM-Global-Solution-2/Building-Relational-Database](https://github.com/Grupo-ELM-Global-Solution-2/Python)
+
+- Repositório Front-end: [https://github.com/Grupo-ELM-Global-Solution-2/Front-end-design-engineering](https://github.com/Grupo-ELM-Global-Solution-2/Front-end-design-engineering)
+
+- Link Vercel: [https://front-end-design-engineering-two.vercel.app/](https://front-end-design-engineering-two.vercel.app/)
+- 
 ---
 
 ## Testes Internos 
