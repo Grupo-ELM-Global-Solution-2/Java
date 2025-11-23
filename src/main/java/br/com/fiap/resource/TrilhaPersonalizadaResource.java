@@ -7,6 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -60,7 +61,7 @@ public class TrilhaPersonalizadaResource {
     @GET
     @Path("/{id_trilha_pers}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByCodigo(@PathParam("id_trilha_pers") Long codigo) {
+    public Response findByCodigo(@PathParam("id_trilha_pers") Long codigo) throws SQLException {
         TrilhaPersonalizadaTO resultado = trilhaPersonalizadaBO.findByCodigo(codigo);
         Response.ResponseBuilder response = (resultado != null) ? Response.ok() : Response.status(404);
         response.entity(resultado);
@@ -77,7 +78,7 @@ public class TrilhaPersonalizadaResource {
     @GET
     @Path("/usuario/{id_user}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByUserId(@PathParam("id_user") Long idUser) {
+    public Response findByUserId(@PathParam("id_user") Long idUser) throws SQLException {
         ArrayList<TrilhaPersonalizadaTO> resultado = trilhaPersonalizadaBO.findByUserId(idUser);
         Response.ResponseBuilder response = (resultado != null && !resultado.isEmpty()) ? Response.ok() : Response.status(404);
         response.entity(resultado);

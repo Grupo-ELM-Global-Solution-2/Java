@@ -63,12 +63,13 @@ public class ModuloDAO {
      * @return um objeto {@link ModuloTO} correspondente ao ID informado,
      * ou {@code null} se nenhum registro for encontrado.
      */
-    public ModuloTO findByCodigo(Long idModulo) {
+    public ModuloTO findByCodigo(Long idModulo) throws SQLException {
         ModuloTO modulo = new ModuloTO();
         String sql = "SELECT * FROM ddd_modulo WHERE id_mod = ?";
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idModulo);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 modulo.setIdModulo(rs.getLong("id_mod"));
                 modulo.setNome(rs.getString("nome"));
@@ -82,6 +83,9 @@ public class ModuloDAO {
             System.out.println("Erro na modulo: " + e.getMessage());
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
         return modulo;
     }

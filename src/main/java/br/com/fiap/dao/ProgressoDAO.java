@@ -62,12 +62,13 @@ public class ProgressoDAO {
      * @return um objeto {@link ProgressoTO} correspondente ao ID informado,
      * ou {@code null} se nenhum registro for encontrado.
      */
-    public ProgressoTO findByCodigo(Long idProgresso) {
+    public ProgressoTO findByCodigo(Long idProgresso) throws SQLException {
         ProgressoTO progresso = new ProgressoTO();
         String sql = "SELECT * FROM ddd_prog WHERE id_prog = ?";
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idProgresso);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 progresso.setIdProgresso(rs.getLong("id_prog"));
                 progresso.setStatus(rs.getInt("status"));
@@ -80,6 +81,9 @@ public class ProgressoDAO {
             System.out.println("Erro na progresso: " + e.getMessage());
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
         return progresso;
     }
@@ -90,13 +94,13 @@ public class ProgressoDAO {
      * @param idUser O ID do usuário.
      * @return uma lista de {@link ProgressoTO} do usuário, ou null em caso de erro.
      */
-    public ArrayList<ProgressoTO> findByUserId(Long idUser) {
+    public ArrayList<ProgressoTO> findByUserId(Long idUser) throws SQLException {
         ArrayList<ProgressoTO> progressos = new ArrayList<>();
         String sql = "SELECT * FROM ddd_prog WHERE id_user = ?";
-
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idUser);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs != null) {
                 while (rs.next()) {
@@ -115,6 +119,9 @@ public class ProgressoDAO {
             return null;
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
 
         return progressos;

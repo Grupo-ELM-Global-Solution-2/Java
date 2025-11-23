@@ -3,6 +3,7 @@ package br.com.fiap.bo;
 import br.com.fiap.dao.ModuloDAO;
 import br.com.fiap.to.ModuloTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +35,7 @@ public class ModuloBO {
      * @param codigo Código (ID) do modulo.
      * @return {@link ModuloTO} correspondente ao código informado ou null se não encontrado.
      */
-    public ModuloTO findByCodigo(Long codigo) {
+    public ModuloTO findByCodigo(Long codigo) throws SQLException {
         moduloDAO = new ModuloDAO();
         return moduloDAO.findByCodigo(codigo);
     }

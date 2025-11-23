@@ -63,12 +63,13 @@ public class TrilhaPersonalizadaDAO {
      * @return um objeto {@link TrilhaPersonalizadaTO} correspondente ao ID informado,
      * ou {@code null} se nenhum registro for encontrado.
      */
-    public TrilhaPersonalizadaTO findByCodigo(Long idTrilhaPers) {
+    public TrilhaPersonalizadaTO findByCodigo(Long idTrilhaPers) throws SQLException {
         TrilhaPersonalizadaTO trilhaP = new TrilhaPersonalizadaTO();
         String sql = "SELECT * FROM ddd_trilha_pers WHERE id_pers = ?";
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idTrilhaPers);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 trilhaP.setIdTrilhaPers(rs.getLong("id_pers"));
                 trilhaP.setIdUser(rs.getLong("id_user"));
@@ -81,6 +82,9 @@ public class TrilhaPersonalizadaDAO {
             System.out.println("Erro na busca: " + e.getMessage());
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
         return trilhaP;
     }
@@ -91,13 +95,13 @@ public class TrilhaPersonalizadaDAO {
      * @param idUser O ID do usuário.
      * @return uma lista de {@link TrilhaPersonalizadaTO} do usuário, ou null em caso de erro.
      */
-    public ArrayList<TrilhaPersonalizadaTO> findByUserId(Long idUser) {
+    public ArrayList<TrilhaPersonalizadaTO> findByUserId(Long idUser) throws SQLException {
         ArrayList<TrilhaPersonalizadaTO> trilhas = new ArrayList<>();
         String sql = "SELECT * FROM ddd_trilha_pers WHERE id_user = ? ORDER BY data_criacao DESC";
-
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idUser);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs != null) {
                 while (rs.next()) {
@@ -116,6 +120,9 @@ public class TrilhaPersonalizadaDAO {
             return null;
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
 
         return trilhas;

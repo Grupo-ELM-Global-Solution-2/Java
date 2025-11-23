@@ -62,12 +62,13 @@ public class UsuarioDAO {
      * @return um objeto {@link UsuarioTO} correspondente ao ID informado,
      * ou {@code null} se nenhum registro for encontrado.
      */
-    public UsuarioTO findByCodigo(Long idUser) {
+    public UsuarioTO findByCodigo(Long idUser) throws SQLException {
         UsuarioTO user = new UsuarioTO();
         String sql = "SELECT * FROM ddd_user WHERE id_user = ?";
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idUser);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 user.setIdUser(rs.getLong("id_user"));
                 user.setNome(rs.getString("nome"));
@@ -80,6 +81,9 @@ public class UsuarioDAO {
             System.out.println("Erro na user: " + e.getMessage());
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
         return user;
     }
@@ -90,12 +94,13 @@ public class UsuarioDAO {
      * @param email O email do usuário.
      * @return O objeto {@link UsuarioTO} encontrado, ou {@code null} se não existir.
      */
-    public UsuarioTO findByEmail(String email) {
+    public UsuarioTO findByEmail(String email) throws SQLException {
         UsuarioTO user = null;
         String sql = "SELECT * FROM ddd_user WHERE email = ?";
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 user = new UsuarioTO();
@@ -108,6 +113,9 @@ public class UsuarioDAO {
             System.out.println("Erro na busca de usuário por email: " + e.getMessage());
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
         return user;
     }

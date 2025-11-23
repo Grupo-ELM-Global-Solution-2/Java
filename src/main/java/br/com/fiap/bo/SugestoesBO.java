@@ -3,6 +3,7 @@ package br.com.fiap.bo;
 import br.com.fiap.dao.SugestoesDAO;
 import br.com.fiap.to.SugestoesTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +35,7 @@ public class SugestoesBO {
      * @param codigo Código (ID) da sugestão.
      * @return {@link SugestoesTO} correspondente ao código informado ou null se não encontrada.
      */
-    public SugestoesTO findByCodigo(Long codigo) {
+    public SugestoesTO findByCodigo(Long codigo) throws SQLException {
         sugestoesDAO = new SugestoesDAO();
         return sugestoesDAO.findByCodigo(codigo);
     }

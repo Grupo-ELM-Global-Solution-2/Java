@@ -3,6 +3,7 @@ package br.com.fiap.bo;
 import br.com.fiap.dao.UsuarioDAO;
 import br.com.fiap.to.UsuarioTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +35,7 @@ public class UsuarioBO {
      * @param codigo Código (ID) do usuário.
      * @return {@link UsuarioTO} correspondente ao código informado ou null se não encontrado.
      */
-    public UsuarioTO findByCodigo(Long codigo) {
+    public UsuarioTO findByCodigo(Long codigo) throws SQLException {
         usuarioDAO = new UsuarioDAO();
         return usuarioDAO.findByCodigo(codigo);
     }
@@ -45,7 +46,7 @@ public class UsuarioBO {
      * @param email Email do usuário.
      * @return {@link UsuarioTO} correspondente ao email ou null.
      */
-    public UsuarioTO findByEmail(String email) {
+    public UsuarioTO findByEmail(String email) throws SQLException {
         usuarioDAO = new UsuarioDAO();
         return usuarioDAO.findByEmail(email);
     }

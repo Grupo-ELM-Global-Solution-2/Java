@@ -64,12 +64,13 @@ public class TrilhaDAO {
      * @return um objeto {@link TrilhaTO} correspondente ao ID informado,
      * ou {@code null} se nenhum registro for encontrado.
      */
-    public TrilhaTO findByCodigo(Long idTrilha) {
+    public TrilhaTO findByCodigo(Long idTrilha) throws SQLException {
         TrilhaTO trilha = new TrilhaTO();
         String sql = "SELECT * FROM ddd_trilha WHERE id_tri = ?";
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idTrilha);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 trilha.setIdTrilha(rs.getLong("id_tri"));
                 trilha.setNome(rs.getString("nome"));
@@ -82,6 +83,9 @@ public class TrilhaDAO {
             System.out.println("Erro na trilha: " + e.getMessage());
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
         return trilha;
     }

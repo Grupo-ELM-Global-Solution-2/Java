@@ -3,6 +3,7 @@ package br.com.fiap.bo;
 import br.com.fiap.dao.TrilhaDAO;
 import br.com.fiap.to.TrilhaTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +35,7 @@ public class TrilhaBO {
      * @param codigo Código (ID) da trilha.
      * @return {@link TrilhaTO} correspondente ao código informado ou null se não encontrada.
      */
-    public TrilhaTO findByCodigo(Long codigo) {
+    public TrilhaTO findByCodigo(Long codigo) throws SQLException {
         trilhaDAO = new TrilhaDAO();
         return trilhaDAO.findByCodigo(codigo);
     }

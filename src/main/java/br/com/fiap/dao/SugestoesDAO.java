@@ -66,12 +66,13 @@ public class SugestoesDAO {
      * @return um objeto {@link SugestoesTO} correspondente ao ID informado,
      * ou {@code null} se nenhum registro for encontrado.
      */
-    public SugestoesTO findByCodigo(Long idSugestoes) {
+    public SugestoesTO findByCodigo(Long idSugestoes) throws SQLException {
         SugestoesTO sugestao = new SugestoesTO();
         String sql = "SELECT * FROM ddd_sugs WHERE id_sugs = ?";
+        ResultSet rs = null;
         try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
             ps.setLong(1, idSugestoes);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 sugestao.setIdSugestoes(rs.getLong("id_sugs"));
                 sugestao.setTitulo(rs.getString("titulo"));
@@ -87,6 +88,9 @@ public class SugestoesDAO {
             System.out.println("Erro na busca: " + e.getMessage());
         } finally {
             ConnectionFactory.closeConnection();
+            if (rs != null) {
+                rs.close();
+            }
         }
         return sugestao;
     }

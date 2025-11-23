@@ -7,6 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -55,7 +56,7 @@ public class UsuarioResource {
     @GET
     @Path("/{id_user}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByCodigo(@PathParam("id_user") Long codigo) {
+    public Response findByCodigo(@PathParam("id_user") Long codigo) throws SQLException {
         UsuarioTO resultado = usuarioBO.findByCodigo(codigo);
         Response.ResponseBuilder response = (resultado != null) ? Response.ok() : Response.status(404);
         response.entity(resultado);
@@ -72,7 +73,7 @@ public class UsuarioResource {
     @GET
     @Path("/email/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByEmail(@PathParam("email") String email) {
+    public Response findByEmail(@PathParam("email") String email) throws SQLException {
         if (email == null || email.isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST).entity("O email é obrigatório.").build();
         }

@@ -3,6 +3,7 @@ package br.com.fiap.bo;
 import br.com.fiap.dao.ProgressoDAO;
 import br.com.fiap.to.ProgressoTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +35,7 @@ public class ProgressoBO {
      * @param codigo Código (ID) do progresso.
      * @return {@link ProgressoTO} correspondente ao código informado ou null se não encontrado.
      */
-    public ProgressoTO findByCodigo(Long codigo) {
+    public ProgressoTO findByCodigo(Long codigo) throws SQLException {
         progressoDAO = new ProgressoDAO();
         return progressoDAO.findByCodigo(codigo);
     }
@@ -45,7 +46,7 @@ public class ProgressoBO {
      * @param idUser Código (ID) do usuário.
      * @return ArrayList de {@link ProgressoTO}.
      */
-    public ArrayList<ProgressoTO> findByUserId(Long idUser) {
+    public ArrayList<ProgressoTO> findByUserId(Long idUser) throws SQLException {
         progressoDAO = new ProgressoDAO();
         return progressoDAO.findByUserId(idUser);
     }

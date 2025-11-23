@@ -7,6 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -55,7 +56,7 @@ public class TrilhaResource {
     @GET
     @Path("/{id_trilha}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByCodigo(@PathParam("id_trilha") Long codigo) {
+    public Response findByCodigo(@PathParam("id_trilha") Long codigo) throws SQLException {
         TrilhaTO resultado = trilhaBO.findByCodigo(codigo);
         Response.ResponseBuilder response = (resultado != null) ? Response.ok() : Response.status(404);
         response.entity(resultado);

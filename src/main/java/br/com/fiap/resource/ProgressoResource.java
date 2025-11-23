@@ -7,6 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -55,7 +56,7 @@ public class ProgressoResource {
     @GET
     @Path("/{id_progresso}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByCodigo(@PathParam("id_progresso") Long codigo) {
+    public Response findByCodigo(@PathParam("id_progresso") Long codigo) throws SQLException {
         ProgressoTO resultado = progressoBO.findByCodigo(codigo);
         Response.ResponseBuilder response = (resultado != null) ? Response.ok() : Response.status(404);
         response.entity(resultado);
@@ -72,7 +73,7 @@ public class ProgressoResource {
     @GET
     @Path("/usuario/{id_user}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByUserId(@PathParam("id_user") Long idUser) {
+    public Response findByUserId(@PathParam("id_user") Long idUser) throws SQLException {
         ArrayList<ProgressoTO> resultado = progressoBO.findByUserId(idUser);
 
         Response.ResponseBuilder response = (resultado != null && !resultado.isEmpty()) ? Response.ok() : Response.status(404);

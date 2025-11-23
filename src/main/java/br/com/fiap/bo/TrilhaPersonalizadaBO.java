@@ -3,6 +3,7 @@ package br.com.fiap.bo;
 import br.com.fiap.dao.TrilhaPersonalizadaDAO;
 import br.com.fiap.to.TrilhaPersonalizadaTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -37,7 +38,7 @@ public class TrilhaPersonalizadaBO {
      * @param codigo Código (ID) da trilha personalizada (id_trilha_pers).
      * @return {@link TrilhaPersonalizadaTO} correspondente ao código informado ou null se não encontrado.
      */
-    public TrilhaPersonalizadaTO findByCodigo(Long codigo) {
+    public TrilhaPersonalizadaTO findByCodigo(Long codigo) throws SQLException {
         trilhaPersonalizadaDAO = new TrilhaPersonalizadaDAO();
         return trilhaPersonalizadaDAO.findByCodigo(codigo);
     }
@@ -48,7 +49,7 @@ public class TrilhaPersonalizadaBO {
      * @param idUser Código (ID) do usuário (id_user).
      * @return ArrayList de {@link TrilhaPersonalizadaTO} contendo as trilhas do usuário.
      */
-    public ArrayList<TrilhaPersonalizadaTO> findByUserId(Long idUser) {
+    public ArrayList<TrilhaPersonalizadaTO> findByUserId(Long idUser) throws SQLException {
         trilhaPersonalizadaDAO = new TrilhaPersonalizadaDAO();
         return trilhaPersonalizadaDAO.findByUserId(idUser);
     }

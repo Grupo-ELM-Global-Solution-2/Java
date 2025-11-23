@@ -7,6 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -55,7 +56,7 @@ public class ModuloResource {
     @GET
     @Path("/{id_modulo}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByCodigo(@PathParam("id_modulo") Long codigo) {
+    public Response findByCodigo(@PathParam("id_modulo") Long codigo) throws SQLException {
         ModuloTO resultado = moduloBO.findByCodigo(codigo);
         Response.ResponseBuilder response = (resultado != null) ? Response.ok() : Response.status(404);
         response.entity(resultado);
